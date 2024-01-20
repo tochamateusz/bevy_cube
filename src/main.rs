@@ -6,6 +6,18 @@ struct Person;
 #[derive(Component)]
 struct Name(String);
 
+pub struct HelloPlugin;
+
+impl Plugin for HelloPlugin {
+    fn build(&self, app: &mut App) {
+        let fns = (update_people, greet_people);
+        let chained_fn = fns.chain();
+
+        app.add_systems(Startup, add_people)
+            .add_systems(Update, (hello_world, chained_fn));
+    }
+}
+
 fn add_people(mut commands: Commands) {
     commands.spawn((Person, Name("Test1".to_string())));
     commands.spawn((Person, Name("Test2".to_string())));
@@ -32,8 +44,5 @@ fn hello_world() {
 }
 
 fn main() {
-    App::new()
-        .add_systems(Startup, add_people)
-        .add_systems(Update, (hello_world, (update_people, greet_people).chain()))
-        .run()
+    App::new().add_plugins((DefaultPlugins, HelloPlugin)).run()
 }
