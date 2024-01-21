@@ -1,9 +1,4 @@
-use std::f32::consts::PI;
-
-use bevy::{
-    prelude::*,
-    render::{camera::ScalingMode, primitives::Frustum},
-};
+use bevy::{prelude::*, render::camera::ScalingMode};
 
 fn main() {
     App::new()
