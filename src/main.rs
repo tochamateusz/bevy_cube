@@ -1,4 +1,4 @@
-use bevy::{math, prelude::*, render::camera::ScalingMode};
+use bevy::{prelude::*, render::camera::ScalingMode};
 
 #[derive(Resource, Debug)]
 struct Inc {
@@ -37,7 +37,7 @@ fn update(mut q: Query<&mut Transform, With<Camera>>, mut counter: ResMut<Inc>) 
             },
             Quat::from_rotation_z(0.001),
         );
-        // println!("{:?}", camera.rotation - prev)
+        println!("{:?}", camera.rotation - prev)
     }
 }
 
